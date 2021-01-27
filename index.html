@@ -31,7 +31,7 @@
                            <input id="input-1" type="text" class="form-control text-center" value="1">
                            <button class="btn btn-default"><i id="plus-sign-button-1" class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$1219</h5>
+                        <h5>$ <span id="phone-price">1219</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -50,7 +50,7 @@
                            <button class="btn btn-default"><i id="plus-sign-button-2" class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$59</h5>
+                        <h5>$ <span id="case-price">59</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -85,27 +85,28 @@
 
       const input_01 = document.getElementById("input-1");
       const input_02 = document.getElementById("input-2");
+      const currentPhonePrice = document.getElementById("phone-price");
+      const currentCasePrice = document.getElementById("case-price");
 
       const miSiBtn1 = document.getElementById("minus-sign-button-1");
       miSiBtn1.addEventListener("click",function(){
-         removingProduct(input_01)
+         removingProduct(input_01,currentPhonePrice,1219)
       })
      
 
       const plSiBtn1 = document.getElementById("plus-sign-button-1");
       plSiBtn1.addEventListener("click",function() {
-         addingProduct(input_01);
+         addingProduct(input_01,currentPhonePrice,1219);
       })
 
       const miSiBtn2 = document.getElementById("minus-sign-button-2");
       miSiBtn2.addEventListener("click",function(){
-         removingProduct(input_02);
+         removingProduct(input_02,currentCasePrice,59);
       })
      
-
       const plSiBtn2 = document.getElementById("plus-sign-button-2");
       plSiBtn2.addEventListener("click",function(){
-         addingProduct(input_02);
+         addingProduct(input_02,currentCasePrice,59);
       })
      
 
@@ -124,13 +125,24 @@
 
 
 
-      function addingProduct(id) {
+      function addingProduct(id,currentPriceId,eachPrice) {
          var inputValue = parseInt(id.value);
          id.value = inputValue + 1;
+
+         var currentPrice = parseFloat(currentPriceId.innerText);
+         newPrice =eachPrice*(inputValue + 1);
+
+         currentPriceId.innerText = newPrice;
       }
-      function removingProduct(id) {
+      
+      function removingProduct(id,currentPriceId,eachPrice) {
          var inputValue= parseInt(id.value);
          id.value = inputValue - 1;
+
+         var currentPrice = parseFloat(currentPriceId.innerText);
+         newPrice = eachPrice*(inputValue-1);
+
+         currentPriceId.innerText = newPrice;
       }
 
 
