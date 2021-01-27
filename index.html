@@ -45,7 +45,8 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i id="minus-sign-button-2" class="fas fa-minus"></i></button>
+                           <button class="btn btn-default"><i id="minus-sign-button-2"
+                                 class="fas fa-minus"></i></button>
                            <input id="input-2" type="text" class="form-control text-center" value="1">
                            <button class="btn btn-default"><i id="plus-sign-button-2" class="fas fa-plus"></i></button>
 
@@ -91,99 +92,68 @@
       // input_01.addEventListener();
 
       const miSiBtn1 = document.getElementById("minus-sign-button-1");
-      miSiBtn1.addEventListener("click",function(){
-         removingProduct(input_01,currentPhonePrice,1219)
+      miSiBtn1.addEventListener("click", function () {
+         removingProduct(input_01, currentPhonePrice, 1219)
       })
-     
+
 
       const plSiBtn1 = document.getElementById("plus-sign-button-1");
-      plSiBtn1.addEventListener("click",function() {
-         addingProduct(input_01,currentPhonePrice,1219);
+      plSiBtn1.addEventListener("click", function () {
+         addingProduct(input_01, currentPhonePrice, 1219);
       })
 
       const miSiBtn2 = document.getElementById("minus-sign-button-2");
-      miSiBtn2.addEventListener("click",function(){
-         removingProduct(input_02,currentCasePrice,59);
+      miSiBtn2.addEventListener("click", function () {
+         removingProduct(input_02, currentCasePrice, 59);
       })
-     
+
       const plSiBtn2 = document.getElementById("plus-sign-button-2");
-      plSiBtn2.addEventListener("click",function(){
-         addingProduct(input_02,currentCasePrice,59);
+      plSiBtn2.addEventListener("click", function () {
+         addingProduct(input_02, currentCasePrice, 59);
       })
-     
-
-
-      function addingButton(id){
-         
-
-      }
-
-
-      function removingButton(){
-
-      }
 
 
 
 
-
-      function addingProduct(id,currentPriceId,eachPrice) {
+      function addingProduct(id, currentPriceId, eachPrice) {
          var inputValue = parseInt(id.value);
-         id.value = inputValue + 1;
+         console.log(inputValue);
+         id.value = ++inputValue;
 
          var currentPrice = parseFloat(currentPriceId.innerText);
-         newPrice =eachPrice*(inputValue + 1);
+         console.log(currentPrice);
+         newPrice = eachPrice * inputValue;
+         console.log(newPrice);
 
          currentPriceId.innerText = newPrice;
 
-         var totalCurrentPrice =parseFloat( document.getElementById("total-price1").innerText);
+         var totalCurrentPrice = parseFloat(document.getElementById("total-price1").innerText);
 
          console.log(totalCurrentPrice);
 
-         var totalNewPrice=0;
-
-         if(newPrice==0)
-         {
-            totalNewPrice = totalCurrentPrice-eachPrice;
-         }
-         else
-         { 
-            totalNewPrice = totalCurrentPrice-newPrice;
-         }
-
-
+         var totalNewPrice = 0;
+         totalNewPrice = totalCurrentPrice + eachPrice;
          document.getElementById("total-price1").innerText = totalNewPrice;
          document.getElementById("total-price2").innerText = totalNewPrice;
-
+        
       }
 
-      function removingProduct(id,currentPriceId,eachPrice) {
-         var inputValue= parseInt(id.value);
-         id.value = inputValue - 1;
+      function removingProduct(id, currentPriceId, eachPrice) {
+         var inputValue = parseInt(id.value);
+         id.value = --inputValue;
 
-         var currentPrice = parseFloat(currentPriceId.innerText);
-         newPrice = eachPrice*(inputValue-1);
-
-         currentPriceId.innerText = newPrice;
-
-         var totalCurrentPrice =parseFloat( document.getElementById("total-price1").innerText);
 
          console.log(totalCurrentPrice);
-         var totalNewPrice=0;
-         if(newPrice==0)
-         {
-            totalNewPrice = totalCurrentPrice-eachPrice;
+         var totalNewPrice = 0;
+         if (inputValue >= 0) {
+            var currentPrice = parseFloat(currentPriceId.innerText);
+            newPrice = eachPrice * inputValue;
+            currentPriceId.innerText = newPrice;
+            var totalCurrentPrice = parseFloat(document.getElementById("total-price1").innerText);
+            totalNewPrice = totalCurrentPrice - eachPrice;
+            document.getElementById("total-price1").innerText = totalNewPrice;
+            document.getElementById("total-price2").innerText = totalNewPrice;
          }
-         else
-         { 
-            totalNewPrice = totalCurrentPrice-newPrice;
-         }
-
-         
-
-
-         document.getElementById("total-price1").innerText = totalNewPrice;
-         document.getElementById("total-price2").innerText = totalNewPrice;
       }
 
 
