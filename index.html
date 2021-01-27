@@ -16,7 +16,7 @@
       <div class="container">
          <div class="cart">
             <div class="col-md-12 col-lg-10 mx-auto">
-               <div class="cart-item">
+               <div id="cart-item-01" class="cart-item">
                   <div class="row">
                      <div class="col-md-7 center-item">
                         <img src="images/product-1.png" alt="">
@@ -32,12 +32,13 @@
                            <button class="btn btn-default"><i id="plus-sign-button-1" class="fas fa-plus"></i></button>
                         </div>
                         <h5>$ <span id="phone-price">1219</span></h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <button id="cancel-button-01" class="btn btn-white"><img src="images/remove.png" alt=""
+                              class="remove-item"></button>
                      </div>
                   </div>
                </div>
 
-               <div class="cart-item">
+               <div id="cart-item-02" class="cart-item">
                   <div class="row">
                      <div class="col-md-7 center-item mx-auto">
                         <img src="images/product-2.png" alt="">
@@ -52,7 +53,7 @@
 
                         </div>
                         <h5>$ <span id="case-price">59</span></h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <button id="cancel-button-02" class="btn btn-white"><img src="images/remove.png" alt=""class="remove-item"></button>
                      </div>
                   </div>
                </div>
@@ -82,12 +83,25 @@
    </section>
 
    <script>
-
-
       const input_01 = document.getElementById("input-1");
       const input_02 = document.getElementById("input-2");
       const currentPhonePrice = document.getElementById("phone-price");
       const currentCasePrice = document.getElementById("case-price");
+
+      const cancelButton01 = document.getElementById("cancel-button-01");
+      const cartItem01 = document.getElementById("cart-item-01");
+      const cancelButton02 = document.getElementById("cancel-button-02");
+      const cartItem02 = document.getElementById("cart-item-02");
+      
+
+      cancelButton01.addEventListener("click", function () {
+         itemRemove(cartItem01,currentPhonePrice);
+      })
+      cancelButton02.addEventListener("click", function () {
+         itemRemove(cartItem02,currentCasePrice);
+      })
+
+     
 
       // input_01.addEventListener();
 
@@ -114,46 +128,49 @@
 
 
 
-
+      var totalCurrentPrice=0;
+      var newPrice=0;
+      var currentPrice=0;
       function addingProduct(id, currentPriceId, eachPrice) {
          var inputValue = parseInt(id.value);
-         console.log(inputValue);
          id.value = ++inputValue;
-
-         var currentPrice = parseFloat(currentPriceId.innerText);
-         console.log(currentPrice);
+         currentPrice = parseFloat(currentPriceId.innerText);
          newPrice = eachPrice * inputValue;
-         console.log(newPrice);
-
          currentPriceId.innerText = newPrice;
-
-         var totalCurrentPrice = parseFloat(document.getElementById("total-price1").innerText);
-
-         console.log(totalCurrentPrice);
-
-         var totalNewPrice = 0;
-         totalNewPrice = totalCurrentPrice + eachPrice;
+         totalCurrentPrice = parseFloat(document.getElementById("total-price1").innerText);
+        
+         var totalNewPrice = totalCurrentPrice + eachPrice;
          document.getElementById("total-price1").innerText = totalNewPrice;
          document.getElementById("total-price2").innerText = totalNewPrice;
-        
+
       }
 
       function removingProduct(id, currentPriceId, eachPrice) {
          var inputValue = parseInt(id.value);
-         id.value = --inputValue;
-
-
-         console.log(totalCurrentPrice);
-         var totalNewPrice = 0;
+         --inputValue;
+        var totalNewPrice=0;
          if (inputValue >= 0) {
-            var currentPrice = parseFloat(currentPriceId.innerText);
+            id.value = inputValue;
+            currentPrice = parseFloat(currentPriceId.innerText);
             newPrice = eachPrice * inputValue;
             currentPriceId.innerText = newPrice;
-            var totalCurrentPrice = parseFloat(document.getElementById("total-price1").innerText);
+            totalCurrentPrice = parseFloat(document.getElementById("total-price1").innerText);
             totalNewPrice = totalCurrentPrice - eachPrice;
             document.getElementById("total-price1").innerText = totalNewPrice;
             document.getElementById("total-price2").innerText = totalNewPrice;
          }
+         else {
+            id.value = 0;
+         }
+      }
+
+
+      function itemRemove(id,cPrice){
+      var value = parseFloat(cPrice.innerText);
+      id.style.display = "none";
+      document.getElementById("total-price1").innerText = parseFloat(document.getElementById("total-price1").innerText)-value;
+      document.getElementById("total-price2").innerText = parseFloat(document.getElementById("total-price2").innerText)-value;
+
       }
 
 
