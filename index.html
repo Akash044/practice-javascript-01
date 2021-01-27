@@ -66,9 +66,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
+                        <h5>$ <span id="total-price1">1278</span></h5>
                         <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$ <span id="total-price2">1278</span></h5>
                      </div>
                   </div>
                </div>
@@ -87,6 +87,8 @@
       const input_02 = document.getElementById("input-2");
       const currentPhonePrice = document.getElementById("phone-price");
       const currentCasePrice = document.getElementById("case-price");
+
+      // input_01.addEventListener();
 
       const miSiBtn1 = document.getElementById("minus-sign-button-1");
       miSiBtn1.addEventListener("click",function(){
@@ -133,8 +135,28 @@
          newPrice =eachPrice*(inputValue + 1);
 
          currentPriceId.innerText = newPrice;
+
+         var totalCurrentPrice =parseFloat( document.getElementById("total-price1").innerText);
+
+         console.log(totalCurrentPrice);
+
+         var totalNewPrice=0;
+
+         if(newPrice==0)
+         {
+            totalNewPrice = totalCurrentPrice-eachPrice;
+         }
+         else
+         { 
+            totalNewPrice = totalCurrentPrice-newPrice;
+         }
+
+
+         document.getElementById("total-price1").innerText = totalNewPrice;
+         document.getElementById("total-price2").innerText = totalNewPrice;
+
       }
-      
+
       function removingProduct(id,currentPriceId,eachPrice) {
          var inputValue= parseInt(id.value);
          id.value = inputValue - 1;
@@ -143,6 +165,25 @@
          newPrice = eachPrice*(inputValue-1);
 
          currentPriceId.innerText = newPrice;
+
+         var totalCurrentPrice =parseFloat( document.getElementById("total-price1").innerText);
+
+         console.log(totalCurrentPrice);
+         var totalNewPrice=0;
+         if(newPrice==0)
+         {
+            totalNewPrice = totalCurrentPrice-eachPrice;
+         }
+         else
+         { 
+            totalNewPrice = totalCurrentPrice-newPrice;
+         }
+
+         
+
+
+         document.getElementById("total-price1").innerText = totalNewPrice;
+         document.getElementById("total-price2").innerText = totalNewPrice;
       }
 
 
